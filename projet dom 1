@@ -1,0 +1,102 @@
+ Fonctionnalités incluses :
+Boutons + et - pour ajuster la quantité
+
+Suppression d’un article
+
+Bouton cœur ❤️ qui change de couleur
+
+Calcul dynamique du prix total
+
+🛒 💡 Exemple HTML de structure du panier 
+html
+
+<div class="cart-item">
+  <div class="details">
+    <h3>Article 1</h3>
+    <p>Prix unitaire : <span class="price">20</span> €</p>
+    <div class="quantity">
+      <button class="minus">-</button>
+      <span class="qty">1</span>
+      <button class="plus">+</button>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="like">❤️</button>
+    <button class="delete">🗑️ Supprimer</button>
+  </div>
+</div>
+
+
+
+<h2>Total : <span id="total-price">20</span> €</h2>
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateTotal();
+
+  // Plus
+  document.querySelectorAll(".plus").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const qtyEl = btn.parentElement.querySelector(".qty");
+      qtyEl.textContent = parseInt(qtyEl.textContent) + 1;
+      updateTotal();
+    });
+  });
+
+  // Moins
+  document.querySelectorAll(".minus").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const qtyEl = btn.parentElement.querySelector(".qty");
+      let currentQty = parseInt(qtyEl.textContent);
+      if (currentQty > 1) {
+        qtyEl.textContent = currentQty - 1;
+        updateTotal();
+      }
+    });
+  });
+
+  
+  document.querySelectorAll(".delete").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.closest(".cart-item").remove();
+      updateTotal();
+    });
+  });
+
+  // Like
+  document.querySelectorAll(".like").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.classList.toggle("liked");
+      btn.style.color = btn.classList.contains("liked") ? "red" : "black";
+    });
+  });
+});
+
+function updateTotal() {
+  let total = 0;
+  document.querySelectorAll(".cart-item").forEach(item => {
+    const price = parseFloat(item.querySelector(".price").textContent);
+    const qty = parseInt(item.querySelector(".qty").textContent);
+    total += price * qty;
+  });
+  document.getElementById("total-price").textContent = total.toFixed(2);
+}
+🎨 CSS minimal pour améliorer l'affichage (optionnel)
+html
+
+<style>
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.quantity button {
+  padding: 5px 10px;
+}
+
+.liked {
+  color: red;
+  transition: color 0.3s;
+}
+</style>
