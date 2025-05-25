@@ -3,11 +3,11 @@ Boutons + et - pour ajuster la quantité
 
 Suppression d’un article
 
-Bouton cœur ❤️ qui change de couleur
+Bouton cœur  qui change de couleur
 
 Calcul dynamique du prix total
 
-🛒 💡 Exemple HTML de structure du panier 
+ structure du panier 
 html
 
 <div class="cart-item">
@@ -21,8 +21,8 @@ html
     </div>
   </div>
   <div class="actions">
-    <button class="like">❤️</button>
-    <button class="delete">🗑️ Supprimer</button>
+    <button class="like"></button>
+    <button class="delete"> Supprimer</button>
   </div>
 </div>
 
@@ -80,7 +80,7 @@ function updateTotal() {
   });
   document.getElementById("total-price").textContent = total.toFixed(2);
 }
-🎨 CSS minimal pour améliorer l'affichage (optionnel)
+CSS minimal pour améliorer l'affichage (optionnel)
 html
 
 <style>
